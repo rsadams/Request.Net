@@ -5,7 +5,7 @@ namespace Request.Net.Services.Core
     /*
     * Implementation of the RequestCoreService
     */ 
-    public class RequestCoreService
+    public class RequestCoreService : IRequestCoreService
     {
         protected string addressRequestCore;
 

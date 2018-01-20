@@ -1,6 +1,6 @@
 using Request.Net.Services.External;
 
-namespace Request.Net.Services.Contracts
+namespace Request.Net.Services.External
 {
     /*
     * Implementation for the IPFSService.  It looks like these are used to provide

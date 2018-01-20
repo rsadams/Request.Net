@@ -1,6 +1,7 @@
 using Request.Net.Services.External;
+using Request.Net.Services.Core;
 
-namespace Request.Net.Services.Contracts
+namespace Request.Net.Services.External
 {
     /*
     * Implementation for the Web3SingleService.  It looks like these are used to provide

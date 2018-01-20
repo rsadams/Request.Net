@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Request.Net.Services.Contracts
 {
     /*

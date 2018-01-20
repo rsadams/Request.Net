@@ -23,5 +23,25 @@ namespace Request.Net
 
     public delegate void GetRequest();
     public delegate void IPFSAddFile();
-    public delegate void ErrorData(); 
+    public delegate void ErrorData();
+
+    // Appears to provide a wrapper for de-serialising the artifact JSON?
+    public class Abi
+    {
+        string Name { get; set; }
+    }
+
+    // Appears to provide a wrapper for de-serialising the artifact JSON?
+    public class Network
+    {
+        public string Address { get; set; }
+        public string BlockNumber { get; set; }
+    }
+
+    // Appears to provide a wrapper for de-serialising the artifact JSON?
+    public class InterfaceArtifact
+    {
+        public Abi Abi { get; set; }
+        public Network[] Networks { get; set; }
+    }
 }

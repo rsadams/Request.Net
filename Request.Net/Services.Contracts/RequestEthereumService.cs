@@ -5,7 +5,7 @@ namespace Request.Net.Services.Contracts
     /*
     * Implementation of the RequestEthereumService
     */ 
-    public class RequestEthereumService 
+    public class RequestEthereumService : IRequestEthereumService
     {
         /*
         * Instantiate a new RequestEthereumService
