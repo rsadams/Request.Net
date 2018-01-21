@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Request.Net", "Request.Net\Request.Net.csproj", "{D6E142C9-8A27-4657-A534-D2BFFEB2116F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Request.App", "Request.App\Request.App.csproj", "{FE4CDD08-7B63-420A-8C8B-F9248D3C59FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{D6E142C9-8A27-4657-A534-D2BFFEB2116F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6E142C9-8A27-4657-A534-D2BFFEB2116F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6E142C9-8A27-4657-A534-D2BFFEB2116F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4CDD08-7B63-420A-8C8B-F9248D3C59FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4CDD08-7B63-420A-8C8B-F9248D3C59FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4CDD08-7B63-420A-8C8B-F9248D3C59FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4CDD08-7B63-420A-8C8B-F9248D3C59FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

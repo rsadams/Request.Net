@@ -1,4 +1,6 @@
 using System;
+using Request.Net.Services.External;
+using Nethereum.Contracts;
 
 namespace Request.Net.Services.Core
 {
@@ -7,14 +9,15 @@ namespace Request.Net.Services.Core
     */ 
     public class RequestCoreService : IRequestCoreService
     {
-        protected string addressRequestCore;
+        private readonly Contract _contract;
 
         /*
-        * Instantiate a new RequestCoreService
+        * Instantiate a new RequestCoreService.
         */ 
         public RequestCoreService()
         {
-            throw new NotImplementedException();
+            // Fetch the contract from the required network via it's ABI
+            _contract = Web3SingleService.Instance().Web3.Eth.GetContract("Abi", "ContractAddress");
         }
 
         /*

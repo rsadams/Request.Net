@@ -1,21 +1,31 @@
-using System;
 using Request.Net.Services.Core;
 using Request.Net.Services.Contracts;
+using Request.Net.Services.Extensions;
+using Request.Net.Services.External;
 
 namespace Request.Net
 {
     public class RequestNetwork
     {
-        private readonly IRequestEthereumService _requestEthereumService;
-        private readonly IRequestCoreService _requestCoreService;
+        public IRequestCoreService RequestCoreService { get; private set; }
+        public IRequestEthereumService RequestEthereumService { get; private set; }
+        public IRequestSynchroneExtensionEscrowService RequestSynchroneExtensionEscrowService { get; private set; }
 
         /*
         * Instantiate a new RequestNetwork class.
         */
-        public RequestNetwork()
+        public RequestNetwork(string networkUrl)
         {
-            _requestEthereumService = new RequestEthereumService();
-            _requestCoreService = new RequestCoreService();
+            // Initialise the Web3 singleton
+            Web3SingleService.Instance().Init(networkUrl);
+
+            // Initialise the IpfsSingleton
+            IpfsSingleService.Instance().Init();
+
+            // Initialise the service interfaces
+            RequestCoreService = new RequestCoreService();
+            RequestEthereumService = new RequestEthereumService();
+            RequestSynchroneExtensionEscrowService = new RequestSynchroneExtensionEscrowService();
         }
     }    
 }

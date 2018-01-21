@@ -3,32 +3,33 @@ using Request.Net.Services.External;
 namespace Request.Net.Services.External
 {
     /*
-    * Implementation for the IPFSService.  It looks like these are used to provide
-    * "Singleton" implementations in the TyopeScript code?  Probably better to use \
-    * DI later..? 
+    * Not really a singleton but for now we're following the patterns from the 
+    * original SDK.
     */
-    public class IPFSSingleService
+    public class IpfsSingleService
     {
-        private static IPFSSingleService _instance;
+        private static IpfsSingleService _instance;
 
         /*
          * Protected constructor
         */
-        protected IPFSSingleService()
+        protected IpfsSingleService()
         {
-            
         }
 
         /*
-         * Use "Lazy" initialisation.  Simple but not thread safe. 
+         * Initialise the "singleton" 
         */
-        public static IPFSSingleService Instance()
+        public void Init()
         {
-            if (_instance == null)
-            {
-                _instance = new IPFSSingleService();
-            }
+            _instance = new IpfsSingleService(); 
+        }
 
+        /*
+         * Return the "singleton" instance
+        */
+        public static IpfsSingleService Instance()
+        {
             return _instance;
         }
     }

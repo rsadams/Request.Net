@@ -1,33 +1,40 @@
 using Request.Net.Services.External;
 using Request.Net.Services.Core;
 
+using Nethereum.Web3;
+
 namespace Request.Net.Services.External
 {
     /*
-    * Implementation for the Web3SingleService.  It looks like these are used to provide
-    * "Singleton" implementations in the TypeScript code.  Probably better to use DI later?
+    * Not really a singleton but for now we're following the patterns from the 
+    * original SDK.
     */
     public class Web3SingleService
     {
         private static Web3SingleService _instance;
+        public Web3 Web3 { get; private set; }
 
         /*
          * Protected constructor
         */
-        protected Web3SingleService()
+        protected Web3SingleService(string networkUrl)
         {
+            Web3 = new Nethereum.Web3.Web3(networkUrl);
         }
 
         /*
-         * Use "Lazy" initialisation.  Simple but not thread safe. 
+         * Initialise the singleton 
+        */
+        public void Init(string networkUrl)
+        {
+            _instance = new Web3SingleService(networkUrl);
+        }
+
+        /*
+         * Return the "singleton" instance
         */
         public static Web3SingleService Instance()
         {
-            if (_instance == null)
-            {
-                _instance = new Web3SingleService();
-            }
-
             return _instance;
         }
     }
