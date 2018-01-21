@@ -5,15 +5,30 @@ namespace Request.Net.Services.External
 {
     /*
     * Implementation for the Web3SingleService.  It looks like these are used to provide
-    * "Singleton" implementations in the TypeScript code.
+    * "Singleton" implementations in the TypeScript code.  Probably better to use DI later?
     */
-    public class Web3SingleService : IWeb3SingleService
+    public class Web3SingleService
     {
+        private static Web3SingleService _instance;
+
         /*
-         * Instantiate a new Web3SingleService
+         * Protected constructor
         */
-        public Web3SingleService()
+        protected Web3SingleService()
         {
+        }
+
+        /*
+         * Use "Lazy" initialisation.  Simple but not thread safe. 
+        */
+        public static Web3SingleService Instance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Web3SingleService();
+            }
+
+            return _instance;
         }
     }
 }
