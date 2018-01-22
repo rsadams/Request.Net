@@ -21,17 +21,17 @@ namespace Request.Net.Services.Core
         /*
          * Get the estimation (in Wei) needed to create the request
         */
-        Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension);
+        Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension = "");
 
         /*
          * Get a Request via it's RequestId
         */
-        void GetRequest();
+        Task<Request> GetRequest(string requestId);
 
         /*
          * Get a Request and method via the hash of a transaction
         */
-        void GetRequestByTransactionHash();
+        Task<Request> GetRequestByTransactionHash(string transactionHash);
 
         /*
          * Get a Request's events

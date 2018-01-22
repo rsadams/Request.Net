@@ -57,7 +57,7 @@ namespace Request.Net.Services.Core
         /*
         * Get the estimation (in Wei) needed to create the request
         */
-        public async Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension)
+        public async Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension = "")
         {
             var addressUtil = new AddressUtil(); 
 
@@ -72,23 +72,38 @@ namespace Request.Net.Services.Core
             }
 
             var function = _contract.GetFunction("getCollectEstimation");
-            return await function.CallAsync<UInt64>();
+            return await function.CallAsync<UInt64>(expectedAmount, currencyContract, extension);
         }
 
         /*
         * Get a Request via it's RequestId
         */
-        public void GetRequest()
-        {     
-            throw new NotImplementedException();      
+        public async Task<Request> GetRequest(string requestId)
+        {
+            // Validate is strict hex
+
+            // As of yet I have no idea how this is going to return data..?
+            var function = _contract.GetFunction("requests");
+            var data = await function.CallAsync<Request>(requestId);
+
+            // Build the final Request Object
+            var request = new Request();
+
+            // Get information from the currency contract
+
+            // Get information from the extension contract
+
+            // Get Ipfs data if needed
+
+            return request;
         }
 
         /*
         * Get a Request and method via the hash of a transaction
         */
-        public void GetRequestByTransactionHash()
-        {    
-            throw new NotImplementedException();     
+        public async Task<Request> GetRequestByTransactionHash(string transactionHash)
+        {
+            return new Request();   
         }
 
         /*

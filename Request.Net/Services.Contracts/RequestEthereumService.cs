@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Request.Net.Services.Core;
 using Nethereum.Web3;
 using Nethereum.Contracts;
@@ -40,11 +41,12 @@ namespace Request.Net.Services.Contracts
         /*
         * Create a Request as the payee
         */ 
-        public void CreateRequestAsPayee(string payer, int amountInitial, string data = "", 
-                                         string extension = "", string extensionParams = "", 
-                                         string options = "")
+        public async Task<bool> CreateRequestAsPayee(string payer, int amountInitial, string data = "", 
+            string extension = "", string extensionParams = "", 
+            string options = "")
         {
-            return;
+            var estimation = await _requestCoreService.GetCollectEstimation(100, _contract.Address);
+            return true;
         }
 
         /*

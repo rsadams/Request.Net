@@ -2,18 +2,22 @@ using System;
 
 namespace Request.Net
 {
-    public enum State 
+    public enum State
     {
         Created,
         Accepted,
         Cancelled
     }
 
-    public enum EscrowState 
+    public enum EscrowState
     {
         Created,
         Refunded,
         Released
+    }
+
+    public class Request
+    {
     }
 
     public delegate void TransactionHash(string transactionHash);
