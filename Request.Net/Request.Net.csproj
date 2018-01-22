@@ -27,4 +27,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Nethereum.Web3" Version="2.2.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Services.External\Web3SingleService.cs" />
+    <Compile Remove="ServicesContracts.cs" />
+    <Compile Remove="ServicesExtensions.cs" />
+  </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ namespace Request.Net.Services.Core
         /*
          * Get the estimation (in Wei) needed to create the request
         */
-        void GetCollectEstimation();
+        Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension);
 
         /*
          * Get a Request via it's RequestId

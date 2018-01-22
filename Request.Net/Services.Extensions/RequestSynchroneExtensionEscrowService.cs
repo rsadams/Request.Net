@@ -1,6 +1,5 @@
-﻿using System;
-using Request.Net.Services.External;
-using Nethereum.Contracts;
+﻿using Nethereum.Contracts;
+using Nethereum.Web3;
 
 namespace Request.Net.Services.Extensions
 {
@@ -9,15 +8,15 @@ namespace Request.Net.Services.Extensions
     */  
     public class RequestSynchroneExtensionEscrowService : IRequestSynchroneExtensionEscrowService
     {
+        private readonly Web3 _web3;
         private readonly Contract _contract;
 
         /*
          * Instantiate a new RequestEthereumService
         */
-        public RequestSynchroneExtensionEscrowService()
+        public RequestSynchroneExtensionEscrowService(Web3 web3)
         {
-            // Fetch the contract from the required network via it's ABI
-            // _contract = Web3SingleService.Instance().Web3.Eth.GetContract("Abi", "ContractAddress");    
+            _web3 = web3;
         } 
     }
 }

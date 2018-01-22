@@ -17,7 +17,7 @@ namespace Request.Net
          */
         public static IRequestEthereumService GetServiceFromAddress(string address)
         {
-            return new RequestEthereumService();
+            return null;
         }
     }
 }

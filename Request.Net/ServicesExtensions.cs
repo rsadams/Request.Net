@@ -17,7 +17,7 @@ namespace Request.Net
          */
         public static IRequestSynchroneExtensionEscrowService GetServiceFromAddress(string address)
         {
-            return new RequestSynchroneExtensionEscrowService();
+            return null;
         }
     }
 }

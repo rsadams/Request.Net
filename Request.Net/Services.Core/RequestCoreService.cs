@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Request.Net.Services.External;
 using Nethereum.Contracts;
 using Nethereum.Web3;
 using Newtonsoft.Json.Linq;
+using Nethereum.Util;
 
 namespace Request.Net.Services.Core
 {
@@ -20,10 +20,9 @@ namespace Request.Net.Services.Core
         /*
         * Instantiate a new RequestCoreService.
         */ 
-        public RequestCoreService()
+        public RequestCoreService(Web3 web3)
         {
-            // Fetch our "singleton" Web3
-            _web3 = Web3SingleService.Instance().Web3;
+            _web3 = web3;
 
             // This de-serialisation from an embedded resource is VERY temporary.  Please don't judge :)
             var assembly = Assembly.GetExecutingAssembly();
@@ -58,9 +57,22 @@ namespace Request.Net.Services.Core
         /*
         * Get the estimation (in Wei) needed to create the request
         */
-        public void GetCollectEstimation()
+        public async Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension)
         {
-            throw new NotImplementedException();      
+            var addressUtil = new AddressUtil(); 
+
+            if (!addressUtil.IsChecksumAddress(currencyContract.ToLower()))
+            {
+                throw new Exception("currencyContract must be a valid ETH address");   
+            }
+
+            if (!addressUtil.IsChecksumAddress(extension.ToLower()))
+            {
+                throw new Exception("extension must be a valid ETH address");
+            }
+
+            var function = _contract.GetFunction("getCollectEstimation");
+            return await function.CallAsync<UInt64>();
         }
 
         /*

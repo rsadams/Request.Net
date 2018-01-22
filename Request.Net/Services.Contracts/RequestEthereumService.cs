@@ -1,11 +1,10 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Request.Net.Services.External;
+using Request.Net.Services.Core;
 using Nethereum.Web3;
 using Nethereum.Contracts;
 using Newtonsoft.Json.Linq;
-
 
 namespace Request.Net.Services.Contracts
 {
@@ -15,16 +14,16 @@ namespace Request.Net.Services.Contracts
     public class RequestEthereumService : IRequestEthereumService
     {
         private readonly Web3 _web3;
-
+        private IRequestCoreService _requestCoreService;
         private readonly Contract _contract;
 
         /*
         * Instantiate a new RequestEthereumService
         */ 
-        public RequestEthereumService()
+        public RequestEthereumService(Web3 web3, IRequestCoreService requestCoreService)
         {
-            // Fetch our "singleton" Web3
-            _web3 = Web3SingleService.Instance().Web3;
+            _web3 = web3;
+            _requestCoreService = requestCoreService;
 
             // This de-serialisation from an embedded resource is VERY temporary.  Please don't judge :)
             var assembly = Assembly.GetExecutingAssembly();
@@ -41,9 +40,11 @@ namespace Request.Net.Services.Contracts
         /*
         * Create a Request as the payee
         */ 
-        public void CreateRequestAsPayee()
+        public void CreateRequestAsPayee(string payer, int amountInitial, string data = "", 
+                                         string extension = "", string extensionParams = "", 
+                                         string options = "")
         {
-            throw new NotImplementedException();
+            return;
         }
 
         /*

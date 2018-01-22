@@ -10,7 +10,9 @@ namespace Request.Net.Services.Contracts
         /*
         * Create a Request as the payee
         */
-        void CreateRequestAsPayee();
+        void CreateRequestAsPayee(string payer, int amountInitial, string data = "",
+                                  string extension = "", string extensionParams = "",
+                                  string options = "");
 
         /*
         * Accept a Request as the payer
