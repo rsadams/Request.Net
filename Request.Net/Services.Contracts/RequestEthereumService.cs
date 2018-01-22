@@ -1,14 +1,21 @@
 using System;
+using System.IO;
+using System.Reflection;
 using Request.Net.Services.External;
+using Nethereum.Web3;
 using Nethereum.Contracts;
+using Newtonsoft.Json.Linq;
+
 
 namespace Request.Net.Services.Contracts
 {
     /*
     * Implementation of the RequestEthereumService
-    */ 
+    */
     public class RequestEthereumService : IRequestEthereumService
     {
+        private readonly Web3 _web3;
+
         private readonly Contract _contract;
 
         /*
@@ -16,8 +23,19 @@ namespace Request.Net.Services.Contracts
         */ 
         public RequestEthereumService()
         {
-            // Fetch the contract from the required network via it's ABI
-            _contract = Web3SingleService.Instance().Web3.Eth.GetContract("Abi", "ContractAddress");        
+            // Fetch our "singleton" Web3
+            _web3 = Web3SingleService.Instance().Web3;
+
+            // This de-serialisation from an embedded resource is VERY temporary.  Please don't judge :)
+            var assembly = Assembly.GetExecutingAssembly();
+            var streamReader = new StreamReader(assembly.GetManifestResourceStream("Request.Net.Artifacts.RequestCore.json"));
+
+            // Read the JSON in to a JObject
+            var artifact = JObject.Parse(streamReader.ReadToEnd());
+            var abi = artifact["abi"].ToString();
+            var contractAddress = artifact["networks"]["rinkeby"]["address"].ToString();
+
+            _contract = _web3.Eth.GetContract(abi, contractAddress);
         }
 
         /*
@@ -95,7 +113,7 @@ namespace Request.Net.Services.Contracts
         /*
         * Generate Nethereum method
         */
-        public void GenerateNethereymMethod()
+        public void GenerateNethereumMethod()
         {
             throw new NotImplementedException();
         }

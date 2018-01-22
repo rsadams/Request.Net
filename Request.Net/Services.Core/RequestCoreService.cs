@@ -1,14 +1,20 @@
 using System;
+using System.IO;
+using System.Reflection;
+using System.Threading.Tasks;
 using Request.Net.Services.External;
 using Nethereum.Contracts;
+using Nethereum.Web3;
+using Newtonsoft.Json.Linq;
 
 namespace Request.Net.Services.Core
 {
     /*
     * Implementation of the RequestCoreService
-    */ 
+    */
     public class RequestCoreService : IRequestCoreService
     {
+        private readonly Web3 _web3;
         private readonly Contract _contract;
 
         /*
@@ -16,24 +22,37 @@ namespace Request.Net.Services.Core
         */ 
         public RequestCoreService()
         {
-            // Fetch the contract from the required network via it's ABI
-            _contract = Web3SingleService.Instance().Web3.Eth.GetContract("Abi", "ContractAddress");
+            // Fetch our "singleton" Web3
+            _web3 = Web3SingleService.Instance().Web3;
+
+            // This de-serialisation from an embedded resource is VERY temporary.  Please don't judge :)
+            var assembly = Assembly.GetExecutingAssembly();
+            var streamReader = new StreamReader(assembly.GetManifestResourceStream("Request.Net.Artifacts.RequestCore.json"));
+
+            // Read the JSON in to a JObject
+            var artifact = JObject.Parse(streamReader.ReadToEnd());
+            var abi = artifact["abi"].ToString();
+            var contractAddress = artifact["networks"]["rinkeby"]["address"].ToString();
+
+            _contract = _web3.Eth.GetContract(abi, contractAddress);
         }
 
         /*
         * Get the number of the last request (N.B: number !== id)
         */ 
-        public void GetCurrentNumRequest()
+        public async Task<UInt64> GetCurrentNumRequest()
         {
-            throw new NotImplementedException();
+            var function = _contract.GetFunction("numRequests");
+            return await function.CallAsync<UInt64>();
         }
 
         /*
         * Get the version of the contract
         */
-        public void GetVersion() 
+        public async Task<UInt32> GetVersion() 
         {
-            throw new NotImplementedException();      
+            var function = _contract.GetFunction("VERSION");
+            return await function.CallAsync<UInt32>();
         }
 
         /*

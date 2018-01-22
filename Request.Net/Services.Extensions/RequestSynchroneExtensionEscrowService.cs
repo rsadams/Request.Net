@@ -17,7 +17,7 @@ namespace Request.Net.Services.Extensions
         public RequestSynchroneExtensionEscrowService()
         {
             // Fetch the contract from the required network via it's ABI
-            _contract = Web3SingleService.Instance().Web3.Eth.GetContract("Abi", "ContractAddress");    
+            // _contract = Web3SingleService.Instance().Web3.Eth.GetContract("Abi", "ContractAddress");    
         } 
     }
 }

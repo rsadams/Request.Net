@@ -5,9 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nethereum.Web3" Version="2.2.3" />
+    <Folder Include="Services.Extensions\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services.Extensions\" />
+    <None Remove="Artifacts\Json\RequestBurnManagerSimple.json" />
+    <None Remove="Artifacts\Json\RequestCore.json" />
+    <None Remove="Artifacts\Json\RequestEthereum.json" />
+    <None Remove="Artifacts\Json\RequestSynchrone.json" />
+    <None Remove="Artifacts\RequestBurnManagerSimple.json" />
+    <None Remove="Artifacts\RequestCore.json" />
+    <None Remove="Artifacts\RequestEthereum.json" />
+    <None Remove="Artifacts\RequestSynchrone.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Artifacts\RequestBurnManagerSimple.json" />
+    <EmbeddedResource Include="Artifacts\RequestCore.json" />
+    <EmbeddedResource Include="Artifacts\RequestEthereum.json" />
+    <EmbeddedResource Include="Artifacts\RequestSynchrone.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Nethereum.Web3" Version="2.2.3" />
   </ItemGroup>
 </Project>

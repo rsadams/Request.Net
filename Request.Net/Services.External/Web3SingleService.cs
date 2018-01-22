@@ -19,13 +19,13 @@ namespace Request.Net.Services.External
         */
         protected Web3SingleService(string networkUrl)
         {
-            Web3 = new Nethereum.Web3.Web3(networkUrl);
+            Web3 = new Web3(networkUrl);
         }
 
         /*
          * Initialise the singleton 
         */
-        public void Init(string networkUrl)
+        public static void Init(string networkUrl)
         {
             _instance = new Web3SingleService(networkUrl);
         }

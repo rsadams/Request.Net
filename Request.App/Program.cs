@@ -8,9 +8,10 @@ namespace Request.App
         static void Main(string[] args)
         {
             Console.WriteLine("Initialising RequestNetwork");
-            var RequestNetwork = new RequestNetwork("https://rinkeby.infura.io/BQBjfSi5EKSCQQpXebO");
+            var requestNetwork = new RequestNetwork("https://rinkeby.infura.io/2gunG0CoaeLOsBnYtqjC");
 
-            Console.WriteLine("Initialising RequestNetwork");
+            Console.WriteLine("Version : " + requestNetwork.RequestCoreService.GetVersion().Result);
+            Console.WriteLine("Current Request Number : " + requestNetwork.RequestCoreService.GetCurrentNumRequest().Result);
         }
     }
 }

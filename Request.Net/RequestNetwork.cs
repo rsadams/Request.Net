@@ -17,10 +17,10 @@ namespace Request.Net
         public RequestNetwork(string networkUrl)
         {
             // Initialise the Web3 singleton
-            Web3SingleService.Instance().Init(networkUrl);
+            Web3SingleService.Init(networkUrl);
 
             // Initialise the IpfsSingleton
-            IpfsSingleService.Instance().Init();
+            IpfsSingleService.Init();
 
             // Initialise the service interfaces
             RequestCoreService = new RequestCoreService();

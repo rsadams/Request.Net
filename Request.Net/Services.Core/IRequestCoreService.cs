@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Request.Net.Services.Core
 {
@@ -10,12 +11,12 @@ namespace Request.Net.Services.Core
         /*
          * Get the number of the last request (N.B: number !== id)
         */
-        void GetCurrentNumRequest();
+        Task<UInt64> GetCurrentNumRequest();
 
         /*
          * Get the version of the contract
         */
-        void GetVersion();
+        Task<UInt32> GetVersion();
 
         /*
          * Get the estimation (in Wei) needed to create the request

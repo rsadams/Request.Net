@@ -55,7 +55,7 @@ namespace Request.Net.Services.Contracts
         /*
         * Generate Nethereum method
         */
-        void GenerateNethereymMethod();
+        void GenerateNethereumMethod();
 
         /*
         * Get Request events from the ciurrency contract

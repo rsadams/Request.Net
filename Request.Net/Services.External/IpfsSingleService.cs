@@ -20,7 +20,7 @@ namespace Request.Net.Services.External
         /*
          * Initialise the "singleton" 
         */
-        public void Init()
+        public static void Init()
         {
             _instance = new IpfsSingleService(); 
         }
