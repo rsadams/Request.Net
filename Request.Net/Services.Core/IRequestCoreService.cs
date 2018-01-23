@@ -29,11 +29,6 @@ namespace Request.Net.Services.Core
         Task<Request> GetRequest(string requestId);
 
         /*
-         * Get a Request and method via the hash of a transaction
-        */
-        Task<Request> GetRequestByTransactionHash(string transactionHash);
-
-        /*
          * Get a Request's events
         */
         void GetRequestEvents();

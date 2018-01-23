@@ -45,6 +45,24 @@ namespace Request.Net.Services.Contracts
             string extension = "", string extensionParams = "", 
             string options = "")
         {
+            // Retrieve the default account
+
+            // Validate amount is a positive integer
+
+            // Validate that payer is a valid ETH address
+
+            // Validate that extension is a valid ETH address
+
+            // Validate that extension params length is less then 9?
+
+            // Validate that account and payer are different
+
+            // Get the amount to collect
+
+            // Parse the results
+
+            // Add the Ipfs file
+
             var estimation = await _requestCoreService.GetCollectEstimation(100, _contract.Address);
             return true;
         }

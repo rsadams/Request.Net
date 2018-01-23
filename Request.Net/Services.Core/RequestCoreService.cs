@@ -4,8 +4,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Nethereum.Contracts;
 using Nethereum.Web3;
-using Newtonsoft.Json.Linq;
 using Nethereum.Util;
+using Newtonsoft.Json.Linq;
 
 namespace Request.Net.Services.Core
 {
@@ -57,22 +57,22 @@ namespace Request.Net.Services.Core
         /*
         * Get the estimation (in Wei) needed to create the request
         */
-        public async Task<UInt64> GetCollectEstimation(int expectedAmount, string currencyContract, string extension = "")
+        public async Task<UInt64> GetCollectEstimation(int expectedAmount, string  currencyContract, string extension = "")
         {
             var addressUtil = new AddressUtil(); 
 
-            if (!addressUtil.IsChecksumAddress(currencyContract.ToLower()))
+            if (!addressUtil.IsChecksumAddress(currencyContract))
             {
-                throw new Exception("currencyContract must be a valid ETH address");   
+                throw new ArgumentException("currencyContract must be a valid ETH address");   
             }
 
-            if (!addressUtil.IsChecksumAddress(extension.ToLower()))
+            if (!string.IsNullOrEmpty(extension) && !addressUtil.IsChecksumAddress(extension))
             {
-                throw new Exception("extension must be a valid ETH address");
+                throw new ArgumentException("extension must be a valid ETH address");
             }
 
             var function = _contract.GetFunction("getCollectEstimation");
-            return await function.CallAsync<UInt64>(expectedAmount, currencyContract, extension);
+            return await function.CallAsync<UInt64>(expectedAmount, currencyContract);
         }
 
         /*
@@ -80,30 +80,19 @@ namespace Request.Net.Services.Core
         */
         public async Task<Request> GetRequest(string requestId)
         {
-            // Validate is strict hex
+            Request request = null;
 
-            // As of yet I have no idea how this is going to return data..?
             var function = _contract.GetFunction("requests");
-            var data = await function.CallAsync<Request>(requestId);
-
-            // Build the final Request Object
-            var request = new Request();
-
-            // Get information from the currency contract
-
-            // Get information from the extension contract
-
-            // Get Ipfs data if needed
+            try
+            {
+                request = await function.CallDeserializingToObjectAsync<Request>(Utils.HexStringToByte32(requestId));
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);    
+            }
 
             return request;
-        }
-
-        /*
-        * Get a Request and method via the hash of a transaction
-        */
-        public async Task<Request> GetRequestByTransactionHash(string transactionHash)
-        {
-            return new Request();   
         }
 
         /*
