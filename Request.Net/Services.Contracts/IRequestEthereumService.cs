@@ -18,12 +18,12 @@ namespace Request.Net.Services.Contracts
         /*
         * Accept a Request as the payer
         */
-        void Accept();
+        Task<bool> Accept(string requestId, string options = "");
 
         /*
         * Cancel a Request as payer or payee
         */
-        void Cancel();
+        Task<bool> Cancel(string requestId, string options = "");
 
         /*
         * Pay a Request
@@ -33,17 +33,17 @@ namespace Request.Net.Services.Contracts
         /*
         * Refund a Request as payee
         */
-        void RefundAction();
+        Task<bool> RefundAction(string requestId, int amount, string options = "");
 
         /*
         * Add subtracts as a payee
         */
-        void SubtractAction();
+        Task<bool> SubtractAction(string requestId, int amount, string options = "");
 
         /*
         * Add additionals to a Request as a payer
         */
-        void AdditionalAction();
+        Task<bool> AdditionalAction(string requestId, int amount, string options = "");
 
         /*
         * Alias or RequestCoreServices.GetRequestEvents

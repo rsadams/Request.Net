@@ -37,6 +37,7 @@ namespace Request.App
 
             Console.WriteLine("GetRequest() : " + requestService.GetCompleteRequestById("0xa0f9348269095faeb497d8de0b892d542de6d48e3583363b8c77542561f4e375").Result);
             Console.WriteLine("GetRequestByTransactionHash() : " + requestService.GetCompleteRequestByTransactionHash("0x0d68a139f36e5e809dce06ab58aa8bd6f74f689c2be45c09ecb0d5f601700ec6").Result);
+            Console.WriteLine("CreateRequestAsPayee(): " + requestEthereumService.CreateRequestAsPayee("0x0d5D6c5aB28737C182B9e67194451c2C6BcA8623", 1000).Result);
         }
     }
 }
